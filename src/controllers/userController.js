@@ -40,6 +40,7 @@ exports.getId = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
         const users = await updateUser(Number(req.params.id), req.body);
         res.status(200).send("Usúario editado com sucesso!");
     } catch (e) {
